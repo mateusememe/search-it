@@ -1,4 +1,4 @@
-package com.mateusememe.infrastructure;
+package com.mateusememe.infrastructure.io;
 
 import java.util.Map;
 import java.util.Set;

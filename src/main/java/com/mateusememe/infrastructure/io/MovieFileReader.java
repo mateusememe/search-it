@@ -1,4 +1,4 @@
-package com.mateusememe.infrastructure;
+package com.mateusememe.infrastructure.io;
 
 import java.io.IOException;
 import java.nio.file.Files;
@@ -25,7 +25,7 @@ public class MovieFileReader {
      * Constructor that initializes the file reader with the inverted index entity.
      *
      * @param invertedIndex Data structure of the inverted index used to
-     *                     store the data from the files.
+     *                      store the data from the files.
      */
     public MovieFileReader(Indexer invertedIndex) {
         this.invertedIndex = invertedIndex;
