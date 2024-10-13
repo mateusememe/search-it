@@ -1,6 +1,6 @@
 package com.mateusememe.application.usecase;
 
-import java.util.TreeSet;
+import java.util.Set;
 
 import com.mateusememe.domain.entity.Indexer;
 
@@ -27,7 +27,7 @@ public class SearchMovies {
      * @param searchQuery The query to be searched in the files.
      * @return A sorted set of file names that match the search query.
      */
-    public TreeSet<String> execute(String searchQuery) {
-        return new TreeSet<>(indexer.search(searchQuery.split("\\s+")));
+    public Set<String> execute(String[] searchQuery) {
+        return indexer.search(searchQuery);
     }
 }

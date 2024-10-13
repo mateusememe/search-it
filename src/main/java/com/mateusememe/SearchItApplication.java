@@ -5,9 +5,9 @@ import java.util.Set;
 
 import com.mateusememe.application.usecase.SearchMovies;
 import com.mateusememe.domain.entity.Indexer;
-import com.mateusememe.infrastructure.ArgumentParser;
-import com.mateusememe.infrastructure.MovieFileReader;
-import com.mateusememe.infrastructure.OutputPrinter;
+import com.mateusememe.infrastructure.cli.ArgumentParser;
+import com.mateusememe.infrastructure.io.MovieFileReader;
+import com.mateusememe.infrastructure.io.OutputPrinter;
 
 /**
  * Main class responsible for executing the application via CLI.
@@ -33,7 +33,7 @@ public class SearchItApplication {
         }
 
         List<String> searchTerms = parser.getPositionalArgs();
-        if (searchTerms.isEmpty()) {
+        if (searchTerms.isEmpty() || searchTerms.get(0).isBlank()) {
             System.err.println("Error: A search argument is required.");
             printHelp();
             System.exit(1);
@@ -41,6 +41,7 @@ public class SearchItApplication {
         }
 
         String searchQuery = String.join(" ", searchTerms).toLowerCase();
+        String[] searchQuerySplitted = String.join(" ", searchTerms).toLowerCase().split("\\s+");
         boolean verbose = parser.hasFlag("-v") || parser.hasFlag("--verbose");
         int resultLimit = parser.getIntValue("-l", Integer.MAX_VALUE);
 
@@ -51,9 +52,8 @@ public class SearchItApplication {
 
         try {
             movieFileReader.loadFiles("data");
-
             long startSearchTime = System.nanoTime();
-            Set<String> result = searchMovies.execute(searchQuery);
+            Set<String> result = searchMovies.execute(searchQuerySplitted);
             long endSearchTime = System.nanoTime();
             double searchTime = (endSearchTime - startSearchTime) / 1_000_000.0;
 
@@ -73,7 +73,7 @@ public class SearchItApplication {
     private static void printHelp() {
         System.out.println("Usage: java -jar search.it.jar <search term> [-l <limit>] [-v]");
         System.out.println("Options:");
-        System.out.println("  <search term>   A mandatory search term (string)");
+        System.out.println("  <search term>   A mandatory search term (string) not blank");
         System.out.println("  -l <limit>      Limit the number of results (optional, default: no limit)");
         System.out.println("  -v              Verbose output (optional)");
         System.out.println("  --help, -h      Show this help message");
