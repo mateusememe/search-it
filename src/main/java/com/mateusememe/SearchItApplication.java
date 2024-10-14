@@ -41,7 +41,7 @@ public class SearchItApplication {
         }
 
         String searchQuery = String.join(" ", searchTerms).toLowerCase();
-        String[] searchQuerySplitted = String.join(" ", searchTerms).toLowerCase().split("\\s+");
+        String[] searchQuerySplitted = String.join(" ", searchTerms).toLowerCase().split("\\W+");
         boolean verbose = parser.hasFlag("-v") || parser.hasFlag("--verbose");
         int resultLimit = parser.getIntValue("-l", Integer.MAX_VALUE);
 
