@@ -54,8 +54,9 @@ export JAVA_HOME=$(sdk home java 21.0.3-graal)
 2. **Compile o projeto**:
 
    ```bash
-   mvn clean package -Pnative
+   mvn clean package -Pnative -T1C
    ```
+   * A flag `-T1C` é para acelerar o build que acaba sendo demorado devido o GraalVM (essa flag faz com que o maven use um thread para cada núcleo de CPU).
 
 3. **Execute os testes**:
 
@@ -126,10 +127,9 @@ search.it/
 └── pom.xml
 ```
 
-## Licença
+## Possíveis Melhorias
 
-Este projeto está licenciado sob a Licença MIT. Veja o arquivo [LICENSE.md](./LICENSE) para mais detalhes.
-
-## Contato
-
-Para dúvidas ou sugestões, entre em contato: [matt.mendon@gmail.com](mailto:matt.mendon@gmail.com).
+- Na indexação criar uma forma de indexar por vetores de palavras contidas em cada arquivo.
+- Criar cache da indexação do arquivos e seus respectivos conteudos para não ser necessário ler eles a cada execução da aplicação.
+- Melhorar o algoritmo de destacar os termos de busca no resultado verboso.
+- Dockerizar a aplicação para rodar em um ambiente isolado e dedicado, sem precisar realizar todo um passo a passo de instalação.
