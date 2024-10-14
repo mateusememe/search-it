@@ -71,7 +71,7 @@ public class OutputPrinter {
                 .forEach(entry -> {
                     System.out.println("\nFile: " + entry.getKey());
                     System.out.println("Occurrences: " + entry.getValue());
-                    String snippet = movieFileReader.getSnippet(entry.getKey(), searchQuery);
+                    String snippet = movieFileReader.getSnippet(entry.getKey(), searchTerms);
                     System.out.println("Snippet: " + highlightTerms(snippet, searchTerms));
                 });
 
@@ -116,7 +116,7 @@ public class OutputPrinter {
                 isHighlighted = false;
             } else {
                 highlighted.append(text.substring(lastPos, pos));
-                highlighted.append("\u001B[1;33m"); // Start yellow highlight
+                highlighted.append("\u001B[1;36m"); // Start yellow highlight
                 isHighlighted = true;
             }
             lastPos = pos;
