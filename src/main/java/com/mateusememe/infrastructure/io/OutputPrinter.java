@@ -36,13 +36,14 @@ public class OutputPrinter {
      * @param searchTime  The time taken for the search operation.
      */
     public void printSimple(Set<String> result, String searchQuery, int resultLimit, double searchTime) {
-        System.out.println("Found " + result.size() + " occurrences for the term \"" + searchQuery + "\".");
-
+        System.out.println("Foram encontradas " + result.size() + " ocorrências pelo termo \"" + searchQuery + "\".");
+        System.out.println("Os arquivos que possuem \"" + searchQuery + "\" são:");
         result.stream()
+                .sorted()
                 .limit(resultLimit)
                 .forEach(System.out::println);
 
-        System.out.printf("Search time: %.4f milliseconds%n", searchTime);
+        System.out.printf("Tempo de busca: %.4f milisegundos%n", searchTime);
     }
 
     /**
@@ -55,8 +56,8 @@ public class OutputPrinter {
      * @param searchTime  The time taken for the search operation.
      */
     public void printVerbose(Set<String> result, String searchQuery, int resultLimit, double searchTime) {
-        System.out.println("Found " + result.size() + " occurrences for the term \"" + searchQuery + "\".");
-
+        System.out.println("Foram encontradas " + result.size() + " ocorrências pelo termo \"" + searchQuery + "\".");
+        System.out.println("Os arquivos que possuem \"" + searchQuery + "\" são:");
         String[] searchTerms = searchQuery.toLowerCase().split("\\s+");
         Map<String, Integer> sortedResults = new TreeMap<>((a, b) -> {
             int compByOccurrences = Integer.compare(indexer.countOccurrences(b, searchTerms),
@@ -69,13 +70,13 @@ public class OutputPrinter {
         sortedResults.entrySet().stream()
                 .limit(resultLimit)
                 .forEach(entry -> {
-                    System.out.println("\nFile: " + entry.getKey());
-                    System.out.println("Occurrences: " + entry.getValue());
+                    System.out.println("\nArquivo: " + entry.getKey());
+                    System.out.println("Ocorrências: " + entry.getValue());
                     String snippet = movieFileReader.getSnippet(entry.getKey(), searchTerms);
-                    System.out.println("Snippet: " + highlightTerms(snippet, searchTerms));
+                    System.out.println("Trecho: " + highlightTerms(snippet, searchTerms));
                 });
 
-        System.out.printf("%nSearch time: %.4f milliseconds%n", searchTime);
+        System.out.printf("%nTempo de busca: %.4f milisegundos%n", searchTime);
     }
 
     /**

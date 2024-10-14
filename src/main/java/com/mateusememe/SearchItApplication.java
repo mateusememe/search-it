@@ -34,7 +34,7 @@ public class SearchItApplication {
 
         List<String> searchTerms = parser.getPositionalArgs();
         if (searchTerms.isEmpty() || searchTerms.get(0).isBlank()) {
-            System.err.println("Error: A search argument is required.");
+            System.err.println("Erro: É necessário um argumento de pesquisa.");
             printHelp();
             System.exit(1);
             return;
@@ -71,11 +71,11 @@ public class SearchItApplication {
      * Displays the help message in the terminal.
      */
     private static void printHelp() {
-        System.out.println("Usage: java -jar search.it.jar <search term> [-l <limit>] [-v]");
-        System.out.println("Options:");
-        System.out.println("  <search term>   A mandatory search term (string) not blank");
-        System.out.println("  -l <limit>      Limit the number of results (optional, default: no limit)");
-        System.out.println("  -v              Verbose output (optional)");
-        System.out.println("  --help, -h      Show this help message");
+        System.out.println("Utilização: java -jar search.it.jar <termo de pesquisa> [-l <limite>] [-v]");
+        System.out.println("Opções:");
+        System.out.println("  <search term> Um termo de pesquisa obrigatório (cadeia de caracteres) não vazio");
+        System.out.println("  -l <limit>    Limitar o número de resultados (opcional, predefinição: sem limite)");
+        System.out.println("  -v            Saída detalhada (opcional)");
+        System.out.println("  --help, -h    Mostrar esta mensagem de ajuda");
     }
 }
