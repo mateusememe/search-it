@@ -9,6 +9,8 @@ Esta é uma aplicação desenvolvida para resolver o Desafio Técnico Luiza Labs
 
 ## Instalação do GraalVM
 
+Para mais informações de como instalar o GraalVM com jdk 21 [acesse este link](https://www.graalvm.org/downloads/#).
+
 ### Usando SDKMAN
 
 1. **Instale o SDKMAN** (se ainda não estiver instalado):
