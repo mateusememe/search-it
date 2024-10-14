@@ -1,7 +1,6 @@
 package com.mateusememe.domain.entity;
 
 import java.util.Arrays;
-import java.util.Collections;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Map;
@@ -48,12 +47,11 @@ public class Indexer {
      */
     public Set<String> search(String[] terms) {
         if (terms.length == 0)
-            return Collections.emptySet();
-
-        if (terms.length == 1)
-            return index.getOrDefault(terms[0].toLowerCase(), new HashSet<>());
+            return new HashSet<>();
 
         Set<String> result = index.getOrDefault(terms[0].toLowerCase(), new HashSet<>());
+        if (terms.length == 1)
+            return result;
 
         for (String term : terms) {
             if (!index.containsKey(term))
